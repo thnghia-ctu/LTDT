@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdio.h>
-#define MAX_M 100
-#define MAX_N 500
+#define MAX_M 500
+#define MAX_N 100
 
 typedef struct
 {

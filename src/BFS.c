@@ -1,39 +1,28 @@
 #include <stdio.h>
 #include "../utils/DSC.h"
-#include "../utils/Stack.h"
+#include "../utils/Queue.h"
 
 int mark[MAX_N];
-void DFS_recursive(Graph *pG, int u)
+void BFS(Graph *pG, int s)
 {
-    mark[u] = 1;
-    printf("%d\n", u);
-    for (int v = 1; v <= pG->n; v++)
+    Queue Q;
+    make_null_queue(&Q);
+    enqueue(&Q, s);
+    while (!empty(&Q))
     {
-        if (adjacent(pG, u, v) && mark[v] == 0)
-        {
-            DFS_recursive(pG, v);
-        }
-    }
-}
-
-void DFS(Graph *pG, int s)
-{
-    Stack S;
-    make_null_stack(&S);
-    push(&S, s);
-    while (!empty(&S))
-    {
-        int u = top(&S);
-        pop(&S);
+        int u = front(&Q);
+        dequeue(&Q);
         if (mark[u] != 0)
+        {
             continue;
+        }
         mark[u] = 1;
         printf("%d\n", u);
         for (int v = 1; v <= pG->n; v++)
         {
             if (adjacent(pG, u, v))
             {
-                push(&S, v);
+                enqueue(&Q, v);
             }
         }
     }
@@ -42,7 +31,7 @@ void DFS(Graph *pG, int s)
 int main(void)
 {
     Graph G;
-    int n, m, u, v;
+    int m, n, u, v;
     freopen("dt.txt", "r", stdin);
     scanf("%d%d", &n, &m);
     init_graph(&G, n);
@@ -51,14 +40,15 @@ int main(void)
         scanf("%d%d", &u, &v);
         add_edge(&G, u, v);
     }
-    for (u = 1; u <= n; u++)
+
+    for (u = 1; u <= G.n; u++)
     {
         mark[u] = 0;
     }
-    for (u = 1; u <= n; u++)
+    for (u = 1; u <= G.n; u++)
     {
         if (mark[u] == 0)
-            DFS_recursive(&G, u);
+            BFS(&G, u);
     }
 
     return 0;

@@ -1,4 +1,6 @@
 #include <stdio.h>
+#define MAX_N 100
+
 #include "../utils/DSC.h"
 #include "../utils/Queue.h"
 

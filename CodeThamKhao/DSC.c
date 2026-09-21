@@ -1,5 +1,3 @@
-#pragma once
-
 #include <stdio.h>
 #define MAX_M 500
 
@@ -63,4 +61,41 @@ int degree(Graph *pG, int u)
     }
 
     return deg_u;
+}
+
+int main(void)
+{
+    Graph G;
+    int n, m, u, v, e;
+    freopen("dt.txt", "r", stdin);
+
+    // Đọc số đỉnh và số cung & khởi tạo đồ thị
+    scanf("%d%d", &n, &m);
+    init_graph(&G, n);
+
+    // Đọc m cung và thêm vào đồ thị
+    for (e = 0; e < m; e++)
+    {
+        scanf("%d%d", &u, &v);
+        add_edge(&G, u, v);
+    }
+
+    for (int u = 1; u <= G.n; u++)
+    {
+        printf("neighbors(%d) = ", u);
+        for (int v = 1; v <= G.n; v++)
+        {
+            if (adjacent(&G, u, v))
+            {
+                printf("%d ", v);
+            }
+        }
+        printf("\n");
+    }
+
+    for (int u = 1; u <= n; u++)
+    {
+        printf("deg(%d) = %d\n", u, degree(&G, u));
+    }
+    return 0;
 }

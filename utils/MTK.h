@@ -1,4 +1,4 @@
-#pragma one
+#pragma once
 #include <stdio.h>
 
 #define MAX_N 100
@@ -14,7 +14,7 @@ void init_graph(Graph *pG, int n)
     pG->m = 0;
     for (int u = 1; u <= n; u++)
     {
-        for (int v = 1; u <= n; u++)
+        for (int v = 1; v <= n; v++)
         {
             pG->A[u][v] = 0;
         }

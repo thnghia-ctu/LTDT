@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 #define MAX_SIZE 100
-typedef int ElementType;
+#include "ElementType.h"
 typedef struct
 {
     ElementType data[MAX_SIZE];
